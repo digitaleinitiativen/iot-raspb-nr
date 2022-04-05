@@ -1,0 +1,59 @@
+[
+    {
+        "id": "dcc525bbac76ce8c",
+        "type": "tab",
+        "label": "Arduino2Rasp",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4d6d41dd8e0811d1",
+        "type": "serial in",
+        "z": "dcc525bbac76ce8c",
+        "name": "",
+        "serial": "b139900e86de169f",
+        "x": 180,
+        "y": 460,
+        "wires": [
+            [
+                "7da0152ce5d1f0d2"
+            ]
+        ]
+    },
+    {
+        "id": "7da0152ce5d1f0d2",
+        "type": "debug",
+        "z": "dcc525bbac76ce8c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "b139900e86de169f",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": ""
+    }
+]
