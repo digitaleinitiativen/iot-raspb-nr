@@ -1,0 +1,23 @@
+# Setup SQLite on Raspberry Pi and Hello World
+
+https://pimylifeup.com/raspberry-pi-sqlite/
+
+pi@rasp-test:~ $ sudo apt install sqlite3
+pi@rasp-test:~ $ sqlite3 test.db
+
+pi@rasp-test:~ $ sqlite3 test.db
+SQLite version 3.34.1 2021-01-20 14:10:07
+Enter ".help" for usage hints.
+sqlite> CREATE TABLE weather(id INTEGER PRIMARY KEY AUTOINCREMENT, temperature REAL, humidity REAL, date DATETIME);
+sqlite> .tables
+weather
+sqlite> INSERT INTO weather (temperature, humidity, date) VALUES (20.2, 60, datetime("now"));
+sqlite> INSERT INTO weather (temperature, humidity, date) VALUES (21, 70, datetime("now"));
+sqlite> select * from weather;
+1|20.2|60.0|2022-04-08 07:40:52
+2|21.0|70.0|2022-04-08 07:43:27
+
+# Node Red and SQLite
+
+http://stevesnoderedguide.com/storing-iot-data-sql-database
+http://noderedguide.com/tutorial-sqlite-and-node-red/
