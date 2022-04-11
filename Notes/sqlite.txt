@@ -1,5 +1,6 @@
 # Setup SQLite on Raspberry Pi and Hello World
 
+https://www.sqlitetutorial.net/
 https://pimylifeup.com/raspberry-pi-sqlite/
 
 pi@rasp-test:~ $ sudo apt install sqlite3
