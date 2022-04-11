@@ -1,5 +1,5 @@
-//www.elegoo.com
-//2016.12.9
+//based on www.elegoo.com rev. 2016.12.9
+//edited Martin Muench 2022.04.05
 
 int adc_id = 0;
 int HistoryValue = 0;
@@ -16,7 +16,7 @@ void loop()
 
     if(((HistoryValue>=value) && ((HistoryValue - value) > 10)) || ((HistoryValue<value) && ((value - HistoryValue) > 10)))
     {
-      sprintf(printBuffer,"ADC%d Feuchtigkeits-Level ist %d\n",adc_id, value);
+      sprintf(printBuffer,"ADC%d-%d\n",adc_id, value);
       Serial.print(printBuffer);
       HistoryValue = value;
     }
