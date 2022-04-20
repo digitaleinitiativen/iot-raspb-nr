@@ -1,0 +1,3 @@
+Pfad zur DB: 
+
+/home/pi/sensordata.db
