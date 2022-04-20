@@ -1,0 +1,143 @@
+[
+    {
+        "id": "f5c9139c2026e1ee",
+        "type": "tab",
+        "label": "Step 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "057562f04e73bd0a",
+        "type": "rpi-dht22",
+        "z": "f5c9139c2026e1ee",
+        "name": "dht11",
+        "topic": "rpi-dht1",
+        "dht": "11",
+        "pintype": "2",
+        "pin": "16",
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "b817de1a3a395066"
+            ]
+        ]
+    },
+    {
+        "id": "bc4d2f142c06e070",
+        "type": "inject",
+        "z": "f5c9139c2026e1ee",
+        "name": "trigger_dht11",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "057562f04e73bd0a"
+            ]
+        ]
+    },
+    {
+        "id": "b817de1a3a395066",
+        "type": "debug",
+        "z": "f5c9139c2026e1ee",
+        "name": "output_dht11_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "71d3880d02cfc094",
+        "type": "comment",
+        "z": "f5c9139c2026e1ee",
+        "name": "Sensor DHT11",
+        "info": "",
+        "x": 120,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6e5b2a040c4663c3",
+        "type": "comment",
+        "z": "f5c9139c2026e1ee",
+        "name": "Arduino Waterlevel --> Raspberry PI",
+        "info": "",
+        "x": 180,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3497ad4b96a22e53",
+        "type": "serial in",
+        "z": "f5c9139c2026e1ee",
+        "name": "arduino_usb",
+        "serial": "7761f0457075efce",
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "9d22b35e4c36f746"
+            ]
+        ]
+    },
+    {
+        "id": "9d22b35e4c36f746",
+        "type": "debug",
+        "z": "f5c9139c2026e1ee",
+        "name": "output_split_waterlevel",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7761f0457075efce",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]

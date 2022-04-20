@@ -1,0 +1,201 @@
+[
+    {
+        "id": "dd501b192225ad20",
+        "type": "tab",
+        "label": "Step 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e1e3cc6d4523d21",
+        "type": "rpi-dht22",
+        "z": "dd501b192225ad20",
+        "name": "dht11",
+        "topic": "rpi-dht1",
+        "dht": "11",
+        "pintype": "2",
+        "pin": "16",
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "a33c0491bb70b0eb",
+                "b3c8a304f43792fd"
+            ]
+        ]
+    },
+    {
+        "id": "c0404e0c102b1450",
+        "type": "inject",
+        "z": "dd501b192225ad20",
+        "name": "trigger_dht11",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 320,
+        "wires": [
+            [
+                "3e1e3cc6d4523d21"
+            ]
+        ]
+    },
+    {
+        "id": "4509c46242bdd77b",
+        "type": "debug",
+        "z": "dd501b192225ad20",
+        "name": "output_dht11_raw",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b2e380de7b4944d1",
+        "type": "comment",
+        "z": "dd501b192225ad20",
+        "name": "Sensor DHT11",
+        "info": "",
+        "x": 120,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b6e6a7074973a3fa",
+        "type": "comment",
+        "z": "dd501b192225ad20",
+        "name": "Arduino Waterlevel --> Raspberry PI",
+        "info": "",
+        "x": 180,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5e419f0ab25c5230",
+        "type": "serial in",
+        "z": "dd501b192225ad20",
+        "name": "arduino_usb",
+        "serial": "7761f0457075efce",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "49f9dac1f32c2a69"
+            ]
+        ]
+    },
+    {
+        "id": "2c9e7e1ed87f8144",
+        "type": "debug",
+        "z": "dd501b192225ad20",
+        "name": "output_split_waterlevel",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "49f9dac1f32c2a69",
+        "type": "function",
+        "z": "dd501b192225ad20",
+        "name": "split_waterlevel",
+        "func": "msg.payload = msg.payload.slice(5,-1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "2c9e7e1ed87f8144"
+            ]
+        ]
+    },
+    {
+        "id": "a33c0491bb70b0eb",
+        "type": "function",
+        "z": "dd501b192225ad20",
+        "name": "split_temp",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "4509c46242bdd77b"
+            ]
+        ]
+    },
+    {
+        "id": "b3c8a304f43792fd",
+        "type": "function",
+        "z": "dd501b192225ad20",
+        "name": "split_hum",
+        "func": "msg.payload = msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "4509c46242bdd77b"
+            ]
+        ]
+    },
+    {
+        "id": "7761f0457075efce",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]

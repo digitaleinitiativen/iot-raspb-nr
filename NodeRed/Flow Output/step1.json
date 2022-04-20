@@ -1,0 +1,83 @@
+[
+    {
+        "id": "d135830302e58f97",
+        "type": "tab",
+        "label": "Step1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7a783690dcd03ace",
+        "type": "rpi-dht22",
+        "z": "d135830302e58f97",
+        "name": "dht11",
+        "topic": "rpi-dht1",
+        "dht": "11",
+        "pintype": "2",
+        "pin": "16",
+        "x": 330,
+        "y": 100,
+        "wires": [
+            [
+                "37cedbf3cf09f304"
+            ]
+        ]
+    },
+    {
+        "id": "c17fc70e1806383d",
+        "type": "inject",
+        "z": "d135830302e58f97",
+        "name": "trigger_dht11",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "7a783690dcd03ace"
+            ]
+        ]
+    },
+    {
+        "id": "37cedbf3cf09f304",
+        "type": "debug",
+        "z": "d135830302e58f97",
+        "name": "output_dht11_raw",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1775ae26cbdea53e",
+        "type": "comment",
+        "z": "d135830302e58f97",
+        "name": "Sensor DHT11",
+        "info": "",
+        "x": 140,
+        "y": 40,
+        "wires": []
+    }
+]

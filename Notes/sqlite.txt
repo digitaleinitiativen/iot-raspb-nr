@@ -7,6 +7,7 @@ pi@rasp-test:~ $ sudo apt install sqlite3
 pi@rasp-test:~ $ sqlite3 test.db
 
 pi@rasp-test:~ $ sqlite3 test.db
+
 SQLite version 3.34.1 2021-01-20 14:10:07
 Enter ".help" for usage hints.
 sqlite> CREATE TABLE weather(id INTEGER PRIMARY KEY AUTOINCREMENT, temperature REAL, humidity REAL, date DATETIME);
@@ -17,6 +18,18 @@ sqlite> INSERT INTO weather (temperature, humidity, date) VALUES (21, 70, dateti
 sqlite> select * from weather;
 1|20.2|60.0|2022-04-08 07:40:52
 2|21.0|70.0|2022-04-08 07:43:27
+
+#### new db
+
+pi@rasp-test:~ $ sqlite3 sensordata.db
+sqlite> CREATE TABLE weather(id INTEGER PRIMARY KEY AUTOINCREMENT, temperature REAL, humidity REAL, sensor INTEGER, date DATETIME);
+sqlite> CREATE TABLE waterlevel(id INTEGER PRIMARY KEY AUTOINCREMENT, waterlevel REAL, sensor INTEGER, date DATETIME);
+
+sqlite> INSERT INTO weather (temperature, humidity,sensor, date) VALUES (20.2, 60, 1, datetime("now"));
+sqlite> INSERT INTO waterlevel(waterlevel, sensor, date) VALUES (18, 2, datetime("now"));
+
+sqlite> select * from weather;
+sqlite> select * from waterlevel;
 
 # Node Red and SQLite
 

@@ -1,0 +1,531 @@
+[
+    {
+        "id": "07fab479fd241424",
+        "type": "tab",
+        "label": "Step 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "21b69a174c95d030",
+        "type": "rpi-dht22",
+        "z": "07fab479fd241424",
+        "name": "dht11",
+        "topic": "rpi-dht1",
+        "dht": "11",
+        "pintype": "2",
+        "pin": "16",
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "63783fe380cc3507",
+                "0568176d5e4133ad",
+                "5f7470a3fe647191"
+            ]
+        ]
+    },
+    {
+        "id": "8bb33b2f8b9b6be8",
+        "type": "inject",
+        "z": "07fab479fd241424",
+        "name": "trigger_dht11",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "21b69a174c95d030"
+            ]
+        ]
+    },
+    {
+        "id": "f7f681a148017079",
+        "type": "debug",
+        "z": "07fab479fd241424",
+        "name": "output_dht11_raw",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d6d0c2e755add9c9",
+        "type": "comment",
+        "z": "07fab479fd241424",
+        "name": "Sensor DHT11",
+        "info": "",
+        "x": 120,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a735785e5c33dad5",
+        "type": "comment",
+        "z": "07fab479fd241424",
+        "name": "Arduino Waterlevel --> Raspberry PI",
+        "info": "",
+        "x": 180,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d29f8b56884396b5",
+        "type": "serial in",
+        "z": "07fab479fd241424",
+        "name": "arduino_usb",
+        "serial": "7761f0457075efce",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "643f721dffe04bd5"
+            ]
+        ]
+    },
+    {
+        "id": "9233db7663e47804",
+        "type": "debug",
+        "z": "07fab479fd241424",
+        "name": "output_split_waterlevel",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "643f721dffe04bd5",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "split_waterlevel",
+        "func": "msg.payload = msg.payload.slice(5,-1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "9233db7663e47804",
+                "44f8d1288d6ef0d8",
+                "e1183fe440258deb"
+            ]
+        ]
+    },
+    {
+        "id": "63783fe380cc3507",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "split_temp",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 340,
+        "wires": [
+            [
+                "f7f681a148017079",
+                "1f73185259c38fff"
+            ]
+        ]
+    },
+    {
+        "id": "0568176d5e4133ad",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "split_hum",
+        "func": "msg.payload = msg.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "f7f681a148017079",
+                "2356b98127a4f647"
+            ]
+        ]
+    },
+    {
+        "id": "2f6e11d5da43b64f",
+        "type": "sqlite",
+        "z": "07fab479fd241424",
+        "mydb": "2c1a1bf42967399f",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "SQLiteDBMS",
+        "x": 1490,
+        "y": 300,
+        "wires": [
+            [
+                "f9fab47257bee894"
+            ]
+        ]
+    },
+    {
+        "id": "f9fab47257bee894",
+        "type": "debug",
+        "z": "07fab479fd241424",
+        "name": "output_DBMS",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1910,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7ffee2e22024b185",
+        "type": "inject",
+        "z": "07fab479fd241424",
+        "name": "SELECT FROM WEATHER",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from weather;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1520,
+        "y": 220,
+        "wires": [
+            [
+                "2f6e11d5da43b64f"
+            ]
+        ]
+    },
+    {
+        "id": "b9e241c621ae1b5e",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "show_last_entry",
+        "func": "msg.payload = msg.payload[msg.payload.length - 1];\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1700,
+        "y": 360,
+        "wires": [
+            [
+                "f9fab47257bee894"
+            ]
+        ]
+    },
+    {
+        "id": "f011377a33b36aa4",
+        "type": "comment",
+        "z": "07fab479fd241424",
+        "name": "SQLite DBMS",
+        "info": "",
+        "x": 1370,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f0096cb405572240",
+        "type": "inject",
+        "z": "07fab479fd241424",
+        "name": "SELECT FROM WATERLEVEL",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "SELECT * FROM waterlevel;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1530,
+        "y": 180,
+        "wires": [
+            [
+                "2f6e11d5da43b64f"
+            ]
+        ]
+    },
+    {
+        "id": "7e82bc9de5d195c4",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "insert_waterlevel",
+        "func": "// INSERT INTO waterlevel(waterlevel, sensor, date) VALUES (18, 2, datetime(\"now\"));\nvar sensor_id = 2;\nvar water_level = msg.payload;\nvar sql_command =\"(\" + water_level + \", \" + sensor_id + \", datetime('now'))\";\nvar topic = \"INSERT INTO waterlevel (waterlevel, sensor, date) VALUES \" + sql_command;\nvar msg1 = {};\nmsg1.topic = topic;\nreturn msg1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 180,
+        "wires": [
+            [
+                "2f6e11d5da43b64f",
+                "737a1747431fc24f"
+            ]
+        ]
+    },
+    {
+        "id": "44f8d1288d6ef0d8",
+        "type": "delay",
+        "z": "07fab479fd241424",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1020,
+        "y": 120,
+        "wires": [
+            [
+                "7e82bc9de5d195c4"
+            ]
+        ]
+    },
+    {
+        "id": "5f7470a3fe647191",
+        "type": "function",
+        "z": "07fab479fd241424",
+        "name": "insert_temp_humidity",
+        "func": "// INSERT INTO weather (temperature, humidity, date) VALUES (20.2, 60, datetime(\"now\"))\nvar sensor_id = 1;\nvar temperature = msg.payload;\nvar humidity = msg.humidity;\nvar sql_command =\"(\" + temperature + \", \" + humidity + \", \" + sensor_id + \", datetime('now'))\";\nvar topic = \"INSERT INTO weather (temperature, humidity, sensor, date) VALUES \" + sql_command;\nvar msg1 = {};\nmsg1.topic = topic;\nreturn msg1;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 400,
+        "wires": [
+            [
+                "cb643f3ed0f5b89d",
+                "2f6e11d5da43b64f"
+            ]
+        ]
+    },
+    {
+        "id": "cb643f3ed0f5b89d",
+        "type": "debug",
+        "z": "07fab479fd241424",
+        "name": "debug_dht11_SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "737a1747431fc24f",
+        "type": "debug",
+        "z": "07fab479fd241424",
+        "name": "debug_waterlevel_SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e1183fe440258deb",
+        "type": "ui_gauge",
+        "z": "07fab479fd241424",
+        "name": "",
+        "group": "b9eeb96cc8b90777",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Feuchtigkeitslevel",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "345",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "1f73185259c38fff",
+        "type": "ui_gauge",
+        "z": "07fab479fd241424",
+        "name": "temp_gauge",
+        "group": "b9eeb96cc8b90777",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatur",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2356b98127a4f647",
+        "type": "ui_gauge",
+        "z": "07fab479fd241424",
+        "name": "hum_gauge",
+        "group": "b9eeb96cc8b90777",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Luftfeuchtigkeit",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7761f0457075efce",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "2c1a1bf42967399f",
+        "type": "sqlitedb",
+        "db": "/home/pi/sensordata.db",
+        "mode": "RW"
+    },
+    {
+        "id": "b9eeb96cc8b90777",
+        "type": "ui_group",
+        "name": "Home",
+        "tab": "e619c79e187f9afd",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e619c79e187f9afd",
+        "type": "ui_tab",
+        "name": "Wetter",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
