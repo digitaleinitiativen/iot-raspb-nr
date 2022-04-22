@@ -7,17 +7,23 @@ char printBuffer[128];
 
 void setup()
 {
+  // serielle Kommunikation mit 9600Baud starten
   Serial.begin(9600);
 }
 
 void loop()
 {
-    int value = analogRead(adc_id); // get adc value
+    // anlogen Eingang lesen und Wert speichern
+    int value = analogRead(adc_id); 
 
+    // prüfen ob neuer Wert anders ist als "alter Wert"
     if(((HistoryValue>=value) && ((HistoryValue - value) > 10)) || ((HistoryValue<value) && ((value - HistoryValue) > 10)))
     {
+      // Wert ausgeben
       sprintf(printBuffer,"ADC%d-%d\n",adc_id, value);
       Serial.print(printBuffer);
+
+      // Werta als "alten Wert speichern"
       HistoryValue = value;
     }
 }
