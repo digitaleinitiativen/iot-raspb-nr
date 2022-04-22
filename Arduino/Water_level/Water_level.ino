@@ -8,7 +8,7 @@ char printBuffer[128];
 // wird beim Start ausgeführt
 void setup()
 {
-  // serielle Kommunikation mit 9600Baud starten
+  // serielle Kommunikation mit 9600 baud starten
   Serial.begin(9600);
 }
 
