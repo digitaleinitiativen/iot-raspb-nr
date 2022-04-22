@@ -1,0 +1,2 @@
+INSERT INTO weather (temperature, humidity,sensor, date) VALUES (20.2, 60, 1, datetime("now"));
+INSERT INTO waterlevel (waterlevel, sensor, date) VALUES (18, 2, datetime("now"));

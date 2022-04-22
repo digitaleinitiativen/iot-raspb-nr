@@ -1,0 +1,4 @@
+pi@rasp-test:~ $ sqlite3 sensordata.db
+
+sqlite> CREATE TABLE weather(id INTEGER PRIMARY KEY AUTOINCREMENT, temperature REAL, humidity REAL, sensor INTEGER, date DATETIME);
+sqlite> CREATE TABLE waterlevel(id INTEGER PRIMARY KEY AUTOINCREMENT, waterlevel REAL, sensor INTEGER, date DATETIME);
