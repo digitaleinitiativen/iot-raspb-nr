@@ -5,12 +5,14 @@ int adc_id = 0;
 int HistoryValue = 0;
 char printBuffer[128];
 
+// wird beim Start ausgeführt
 void setup()
 {
   // serielle Kommunikation mit 9600Baud starten
   Serial.begin(9600);
 }
 
+// Wird nach dem Start unendlich wiederholt
 void loop()
 {
     // anlogen Eingang lesen und Wert speichern
