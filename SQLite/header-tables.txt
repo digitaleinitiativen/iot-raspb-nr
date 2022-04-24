@@ -1,0 +1,9 @@
+// zeigt alle Tabellen Namen an
+.tables 
+
+// Schema anzeigen
+.schema <tablename>
+
+// vor dem select header aktivieren
+.headers on
+.mode column

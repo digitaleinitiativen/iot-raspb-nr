@@ -23,3 +23,5 @@ sqlite> select * from waterlevel;
 
 http://stevesnoderedguide.com/storing-iot-data-sql-database
 http://noderedguide.com/tutorial-sqlite-and-node-red/
+
+DELETE from WEATHER
