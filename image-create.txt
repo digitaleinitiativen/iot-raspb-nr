@@ -1,0 +1,27 @@
+1. Raspi Image Tool runterladen 
+    https://www.raspberrypi.com/software/
+
+2. Im Imager Tool - Image vorkonfigurieren
+    VNC und SSH aktivieren, wifi setzen, Passwort ändern
+
+3. update 
+    sudo apt-get update
+    sudo apt-get upgrade
+
+4. SQLite installieren 
+    sudo apt install sqlite3
+    // Details zur DB erstellung siehe Ordner SQLite
+
+5. Node-RED: checken das folgende Pakete installiert sind:
+
+node-red-contrib-dht-sensor
+1.0.4
+
+node-red-dashboard
+3.1.6
+
+node-red-node-pi-gpio
+2.0.1
+
+node-red-node-sqlite
+1.0.3
